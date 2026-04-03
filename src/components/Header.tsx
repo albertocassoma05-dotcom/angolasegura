@@ -1,14 +1,21 @@
 import { ShoppingCart, Search } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 import logo from '@/assets/logo.png';
+import { UserMenu } from '@/components/UserMenu';
+import type { User } from '@supabase/supabase-js';
 
 interface HeaderProps {
   totalItens: number;
   pesquisa: string;
   setPesquisa: (v: string) => void;
   onCarrinhoClick: () => void;
+  user: User | null;
+  onSignOut: () => void;
 }
 
-export function Header({ totalItens, pesquisa, setPesquisa, onCarrinhoClick }: HeaderProps) {
+export function Header({ totalItens, pesquisa, setPesquisa, onCarrinhoClick, user, onSignOut }: HeaderProps) {
+  const navigate = useNavigate();
+
   return (
     <header className="sticky top-0 z-50 bg-primary shadow-lg">
       <div className="container mx-auto flex items-center justify-between py-3 px-4">
@@ -28,18 +35,30 @@ export function Header({ totalItens, pesquisa, setPesquisa, onCarrinhoClick }: H
           />
         </div>
 
-        <button
-          onClick={onCarrinhoClick}
-          className="relative flex items-center gap-2 rounded-full bg-secondary px-4 py-2 text-sm font-semibold text-secondary-foreground transition hover:opacity-90"
-        >
-          <ShoppingCart className="h-5 w-5" />
-          <span className="hidden sm:inline">Carrinho</span>
-          {totalItens > 0 && (
-            <span className="absolute -top-2 -right-2 flex h-5 w-5 items-center justify-center rounded-full bg-accent text-[11px] font-bold text-accent-foreground">
-              {totalItens}
-            </span>
+        <div className="flex items-center gap-3">
+          {user ? (
+            <UserMenu user={user} onSignOut={onSignOut} />
+          ) : (
+            <button
+              onClick={() => navigate('/auth')}
+              className="rounded-full bg-secondary px-4 py-2 text-sm font-semibold text-secondary-foreground transition hover:opacity-90"
+            >
+              Entrar
+            </button>
           )}
-        </button>
+          <button
+            onClick={onCarrinhoClick}
+            className="relative flex items-center gap-2 rounded-full bg-secondary px-4 py-2 text-sm font-semibold text-secondary-foreground transition hover:opacity-90"
+          >
+            <ShoppingCart className="h-5 w-5" />
+            <span className="hidden sm:inline">Carrinho</span>
+            {totalItens > 0 && (
+              <span className="absolute -top-2 -right-2 flex h-5 w-5 items-center justify-center rounded-full bg-accent text-[11px] font-bold text-accent-foreground">
+                {totalItens}
+              </span>
+            )}
+          </button>
+        </div>
       </div>
     </header>
   );
