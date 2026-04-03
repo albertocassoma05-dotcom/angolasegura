@@ -1,4 +1,4 @@
-import { ShoppingCart, Package } from 'lucide-react';
+import { ShoppingCart } from 'lucide-react';
 import type { Produto } from '@/data/produtos';
 import { formatPreco } from '@/data/produtos';
 
@@ -10,8 +10,13 @@ interface Props {
 export function ProductCard({ produto, onAdicionar }: Props) {
   return (
     <div className="group rounded-xl bg-card border border-border overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
-      <div className="aspect-square bg-muted flex items-center justify-center">
-        <Package className="h-16 w-16 text-muted-foreground/40 group-hover:text-primary/50 transition-colors" />
+      <div className="aspect-square bg-muted overflow-hidden">
+        <img
+          src={produto.imagem}
+          alt={produto.nome}
+          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+          loading="lazy"
+        />
       </div>
       <div className="p-4">
         <p className="text-xs font-medium text-muted-foreground uppercase tracking-wide mb-1">
