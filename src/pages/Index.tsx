@@ -5,6 +5,7 @@ import { CategoriaFilter } from '@/components/CategoriaFilter';
 import { ProductCard } from '@/components/ProductCard';
 import { CarrinhoDrawer } from '@/components/CarrinhoDrawer';
 import { useCarrinho } from '@/hooks/useCarrinho';
+import { useAuth } from '@/hooks/useAuth';
 import { produtos } from '@/data/produtos';
 
 const Index = () => {
@@ -12,6 +13,7 @@ const Index = () => {
   const [categoria, setCategoria] = useState('Todos');
   const [carrinhoAberto, setCarrinhoAberto] = useState(false);
   const carrinho = useCarrinho();
+  const { user, signOut } = useAuth();
 
   const produtosFiltrados = produtos.filter(p => {
     const matchPesquisa = p.nome.toLowerCase().includes(pesquisa.toLowerCase());
@@ -26,6 +28,8 @@ const Index = () => {
         pesquisa={pesquisa}
         setPesquisa={setPesquisa}
         onCarrinhoClick={() => setCarrinhoAberto(true)}
+        user={user}
+        onSignOut={signOut}
       />
       <HeroBanner />
       <main className="container mx-auto px-4 pb-12">
