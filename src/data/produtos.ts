@@ -59,7 +59,7 @@ export const produtos: Produto[] = [
   { id: '50', nome: 'Ar Condicionado', preco: 450000, categoria: 'Casa', imagem: 'https://images.unsplash.com/photo-1631567091046-8fa0be4a14e3?w=400&h=400&fit=crop&q=80' },
 ];
 
-export const categorias = ['Todos', 'Moda', 'Acessórios', 'Electrónica', 'Casa'];
+export const categorias = ['Todos', 'Moda', 'Acessórios', 'ELECTRÓNICA', 'Casa'];
 
 export function formatPreco(preco: number): string {
   return new Intl.NumberFormat('pt-AO').format(preco) + ' Kz';
