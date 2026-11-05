@@ -14,6 +14,60 @@ export type Database = {
   }
   public: {
     Tables: {
+      encomendas: {
+        Row: {
+          bairro: string
+          created_at: string
+          estado: string
+          id: string
+          itens: Json
+          metodo_pagamento: string
+          municipio: string
+          nome: string
+          provincia: string
+          referencia: string | null
+          subtotal: number
+          taxa_entrega: number
+          telefone: string
+          total: number
+          user_id: string
+        }
+        Insert: {
+          bairro: string
+          created_at?: string
+          estado?: string
+          id?: string
+          itens?: Json
+          metodo_pagamento: string
+          municipio: string
+          nome: string
+          provincia: string
+          referencia?: string | null
+          subtotal?: number
+          taxa_entrega?: number
+          telefone: string
+          total?: number
+          user_id: string
+        }
+        Update: {
+          bairro?: string
+          created_at?: string
+          estado?: string
+          id?: string
+          itens?: Json
+          metodo_pagamento?: string
+          municipio?: string
+          nome?: string
+          provincia?: string
+          referencia?: string | null
+          subtotal?: number
+          taxa_entrega?: number
+          telefone?: string
+          total?: number
+          user_id?: string
+        }
+        Relationships: []
+      }
       profiles: {
         Row: {
           avatar_url: string | null
